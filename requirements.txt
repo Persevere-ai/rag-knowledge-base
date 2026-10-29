@@ -1,0 +1,45 @@
+# RAG 企业知识库项目依赖清单（版本已按已验证环境锁定，确保可复现）
+# 建议 Python 版本：3.10 ~ 3.13
+# 安装命令：pip install -r requirements.txt
+# 注意：sentence-transformers 会自动安装 torch、transformers 等较大依赖，首次安装耗时较长。
+# 如需 GPU 加速，请自行安装对应的 CUDA 版 torch。
+
+# ---------- LangChain 生态 ----------
+langchain==0.3.23
+langchain-core==0.3.51
+langchain-community==0.3.21
+langchain-experimental==0.3.4
+langchain-openai==0.3.12
+langchain-huggingface==0.1.2
+langchain-milvus==0.1.9
+langchain-text-splitters==0.3.8
+langchain-unstructured==0.1.6
+
+# ---------- LangGraph 工作流编排 ----------
+langgraph==0.3.30
+langgraph-checkpoint==2.0.24
+langgraph-prebuilt==0.1.8
+
+# ---------- 向量数据库 ----------
+pymilvus==2.5.6
+
+# ---------- 大模型与 Embedding ----------
+openai==1.70.0
+sentence-transformers==6.2.0
+tavily-python==0.8.5
+
+# ---------- 文档解析 ----------
+pypdf==6.21.2
+unstructured==0.27.34
+# unstructured 解析 Markdown 依赖 markdown（不在其基础依赖中，缺失会导致
+# unstructured.partition.md 报 ModuleNotFoundError: No module named 'markdown'）
+markdown==3.11.2
+
+# ---------- 基础工具 ----------
+python-dotenv==1.2.4
+loguru==0.7.3
+
+# ---------- Web 服务与可视化界面 ----------
+fastapi==0.162.0
+uvicorn[standard]==0.54.0
+streamlit==1.66.1

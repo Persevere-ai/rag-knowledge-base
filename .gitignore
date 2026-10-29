@@ -1,0 +1,31 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ===== 敏感配置（切勿提交） =====
+.env
+
+# ===== 日志与本地数据 =====
+logs/
+*.log
+
+# ===== 本地向量库文件（Milvus Lite） =====
+*.db
+
+# ===== Docker 数据卷 =====
+volumes/
+
+# ===== IDE / 系统 =====
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# ===== WorkBuddy 本地项目数据（含本地路径，不提交） =====
+.workbuddy/
+
+# ===== 解析中间产物 =====
+datas/output/
