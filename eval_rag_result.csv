@@ -1,0 +1,13 @@
+﻿id,question,rag_hits,direct_hits,total,rag_ans,direct_ans
+1,How much does Milvus cost?,0,2,3,Milvus 开源版本是 100% 免费的，但 Zilliz 提供的托管云服务（Zilliz Cloud）需按使用量付费。,"The open-source version of Milvus is free. However, their managed cloud service, Zilliz Cloud, operates on a paid, usage-based pricing model."
+2,What is the maximum number of collections and partitions in a Milvus instance?,1,0,1,"根据提供的上下文，Milvus 实例最多支持 65,535 个集合（collections）。关于分区（partitions）的具体数量上限，文中未明确说明，但指出分区和分片会计入集合总数的计算中。","There is no hard limit on the number of collections or partitions in a Milvus instance; however, practical limits depend on system resources and metadata storage capacity."
+3,What is the maximum amount of data per insert operation in Milvus?,1,0,2,"The maximum amount of data per insert operation is 1,024 MB.","There is no strict hard limit on the amount of data (number of entities) per insert operation in Milvus; it is constrained by system resources and the `maxInsertCount` configuration parameter. However, for optimal performance, it is recommended to keep batch sizes between 1,000 and 10,000 entities."
+4,What is the maximum vector dimension supported in Milvus by default?,1,0,1,"默认情况下，Milvus 支持的最大向量维度为 32,768。",The maximum vector dimension supported in Milvus by default is **65535**.
+5,How to set nlist and nprobe for IVF indexes?,2,2,2,"根据上下文，设置方法如下：
+
+1.  **nlist**：推荐值为 **4 × sqrt(n)**，其中 n 是 segment 中的实体总数（可通过 `datacoord.segment.maxSize` 除以每个实体大小估算）。
+2.  **nprobe**：具体取决于数据集和场景，涉及准确性与查询性能的权衡，建议通过反复实验找到理想值。","For FAISS IVF indexes:
+
+*   **nlist** (Number of Clusters): Set during **index creation and training**. A common heuristic is $\sqrt{N}$ (where $N$ is the number of vectors), though larger values improve accuracy at the cost of memory.
+*   **nprobe** (Number of Probes): Set during **search queries**. It controls the trade-off between speed and accuracy. Higher values yield better recall but slower search times. Valid range is 1 to $nlist$."
+6,Does Milvus support non-x86 architectures?,2,0,3,根据上下文，Milvus 不支持非 x86 架构。运行 Milvus 的 CPU 必须支持 x86 专用指令集（SSE4.2、AVX、AVX2、AVX512），无法在非 x86 平台（如 ARM、RISC-V）上安装或运行。,"Yes, Milvus supports ARM64 (aarch64) architectures."
