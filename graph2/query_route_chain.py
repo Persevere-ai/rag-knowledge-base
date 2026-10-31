@@ -27,8 +27,11 @@ system = """你是一个擅长将用户问题路由到向量知识库或网络�
 请只输出 JSON 格式，不要输出多余解释。
 JSON 必须包含字段：datasource，取值为 "vectorstore" 或 "web_search"。
 
-向量知识库包含与特定业务领域相关的文档。
-对于知识库相关主题的问题请使用向量知识库，其他情况使用网络搜索。"""
+向量知识库包含：向量数据库 Milvus 的官方文档（产品/运维/性能 FAQ）、
+以及半导体行业技术报告等企业内部技术资料。
+对于与 Milvus、向量数据库、向量检索、索引、半导体工艺/技术相关的问题，
+请路由到向量知识库（vectorstore）；对于天气、新闻、生活常识等知识库之外的问题，
+请路由到网络搜索（web_search）。"""
 route_prompt = ChatPromptTemplate.from_messages(
     [
         ("system", system),  # 系统提示词

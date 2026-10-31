@@ -1,4 +1,5 @@
 from typing import List
+import os
 from langchain_experimental.text_splitter import SemanticChunker
 
 from llm_models.embeddings_model import openai_embedding
@@ -46,6 +47,13 @@ class MarkdownParser:
         )
         docs = []
         for doc in loader.lazy_load():
+            # 补齐 Milvus schema 需要的元数据字段（否则非空约束会导致整批插入失败）
+            m = doc.metadata
+            m.setdefault('title', '')
+            m.setdefault('category_depth', 0)
+            m.setdefault('source', md_file)
+            m.setdefault('filename', os.path.basename(md_file))
+            m.setdefault('filetype', 'text/markdown')
             docs.append(doc)
 
         return docs
@@ -63,6 +71,7 @@ class MarkdownParser:
             element_id = metadata.get('element_id', None)
 
             if category == 'NarrativeText' and parent_id is None:  # 是否为：内容document
+                document.metadata.setdefault('title', '')  # Milvus title 字段非空，无标题片段补空串
                 merged_data.append(document)
             if category == 'Title':
                 document.metadata['title'] = document.page_content
